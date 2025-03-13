@@ -7,8 +7,8 @@
             <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded-sm">
         </div>
         <div id="user-info">
-            <h2 id="user-name">{{ Auth::user()->name || 'Sekenik Cecek' }}</h2>
-            <span id="user-role">{{ Auth::user()->email || 'cecek@sekenik.com' }}</span>
+            <h2 id="user-name">{{'Sekenik Cecek' }}</h2>
+            <span id="user-role">{{'cecek@sekenik.com' }}</span>
         </div>
         <div id="user-dropdown" class="dropdown-menu" style="display: none;">
             <a href="{{ route('profile.edit') }}" class="dropdown-item">
