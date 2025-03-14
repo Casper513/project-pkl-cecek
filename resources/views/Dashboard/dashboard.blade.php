@@ -1,383 +1,419 @@
 @extends('Layouts.presensi')
 @section('content')
-
-<div class="section" id="user-section">
-    <div id="user-detail" class="dropdown">
-        <div class="avatar" onclick="toggleDropdown()">
-            <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded-sm">
-        </div>
-        <div id="user-info">
-            <h2 id="user-name">{{'Sekenik Cecek' }}</h2>
-            <span id="user-role">{{'cecek@sekenik.com' }}</span>
-        </div>
-        <div id="user-dropdown" class="dropdown-menu" style="display: none;">
-            <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                <i class="icon ion-md-person"></i> Profil
-            </a>
-            <a href="#" class="dropdown-item">
-                <i class="icon ion-md-settings"></i> Pengaturan
-            </a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item text-danger">
-                    <i class="icon ion-md-exit"></i> Logout
+    <!-- User Profile Section -->
+    <div class="section" id="user-section">
+        <div id="user-detail" class="dropdown position-relative">
+            <div class="d-flex align-items-center" onclick="toggleDropdown()">
+                <div class="avatar me-3">
+                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded-circle shadow-sm">
+                </div>
+                <div id="user-info">
+                    <h2 id="user-name" class="fs-6 fw-bold mb-0">{{ Auth::user()->name }}</h2>
+                    <span id="user-role" class="text-bg-info fs-7">{{ Auth::user()->email }}</span>
+                </div>
+                <div class="ms-auto">
+                    <ion-icon name="chevron-down-outline" class="text-muted"></ion-icon>
+                </div>
+            </div>
+            <div id="user-dropdown" class="dropdown-menu shadow-lg rounded-3 fade" style="display: none;">
+                <a href="{{ route('profile.edit') }}" class="dropdown-item py-2">
+                    <ion-icon name="person-outline" class="me-2 text-primary"></ion-icon> Profil
                 </a>
-            </form>
+                <a href="#" class="dropdown-item py-2">
+                    <ion-icon name="settings-outline" class="me-2 text-primary"></ion-icon> Pengaturan
+                </a>
+                <div class="dropdown-divider"></div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();"
+                        class="dropdown-item py-2 text-danger">
+                        <ion-icon name="log-out-outline" class="me-2"></ion-icon> Logout
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="section" id="menu-section">
-    <div class="card">
-        <div class="card-body text-center">
-            <div class="list-menu">
-                <div class="item-menu text-center">
-                    <div class="menu-icon">
-                        <a href="" class="green" style="font-size: 40px;">
-                            <ion-icon name="person-sharp"></ion-icon>
+    <!-- Menu Cards Section -->
+    <div class="section mt-3" id="menu-section">
+        <div class="card rounded-4 border-0 shadow-sm">
+            <div class="card-body p-3">
+                <div class="row g-3">
+                    <div class="col-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="menu-icon-wrapper text-center">
+                                <div class="menu-icon rounded-circle bg-light-success mb-2 mx-auto">
+                                    <ion-icon name="person-outline" class="text-success"></ion-icon>
+                                </div>
+                                <span class="menu-name small">Profil</span>
+                            </div>
                         </a>
                     </div>
-                    <div class="menu-name">
-                        <span class="text-center">Profil</span>
-                    </div>
-                </div>
-                <div class="item-menu text-center">
-                    <div class="menu-icon">
-                        <a href="" class="danger" style="font-size: 40px;">
-                            <ion-icon name="calendar-number"></ion-icon>
+                    <div class="col-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="menu-icon-wrapper text-center">
+                                <div class="menu-icon rounded-circle bg-light-danger mb-2 mx-auto">
+                                    <ion-icon name="calendar-number-outline" class="text-danger"></ion-icon>
+                                </div>
+                                <span class="menu-name small">Cuti</span>
+                            </div>
                         </a>
                     </div>
-                    <div class="menu-name">
-                        <span class="text-center">Cuti</span>
-                    </div>
-                </div>
-                <div class="item-menu text-center">
-                    <div class="menu-icon">
-                        <a href="" class="warning" style="font-size: 40px;">
-                            <ion-icon name="document-text"></ion-icon>
+                    <div class="col-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="menu-icon-wrapper text-center">
+                                <div class="menu-icon rounded-circle bg-light-warning mb-2 mx-auto">
+                                    <ion-icon name="document-text-outline" class="text-warning"></ion-icon>
+                                </div>
+                                <span class="menu-name small">Histori</span>
+                            </div>
                         </a>
                     </div>
-                    <div class="menu-name">
-                        <span class="text-center">Histori</span>
-                    </div>
-                </div>
-                <div class="item-menu text-center">
-                    <div class="menu-icon">
-                        <a href="" class="orange" style="font-size: 40px;">
-                            <ion-icon name="location"></ion-icon>
+                    <div class="col-3">
+                        <a href="#" class="text-decoration-none">
+                            <div class="menu-icon-wrapper text-center">
+                                <div class="menu-icon rounded-circle bg-light-primary mb-2 mx-auto">
+                                    <ion-icon name="location-outline" class="text-primary"></ion-icon>
+                                </div>
+                                <span class="menu-name small">Lokasi</span>
+                            </div>
                         </a>
-                    </div>
-                    <div class="menu-name">
-                        Lokasi
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="section mt-2" id="presence-section">
-    <div class="todaypresence">
-        <div class="row">
-            <div class="col-6">
-                <div class="card gradasigreen">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence">
-                                <ion-icon name="camera"></ion-icon>
-                            </div>
-                            <div class="presencedetail">
-                                <h4 class="presencetitle">Masuk</h4>
-                                <span>08:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card gradasired">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence">
-                                <ion-icon name="camera"></ion-icon>
-                            </div>
-                            <div class="presencedetail">
-                                <h4 class="presencetitle">Pulang</h4>
-                                <span>03:00</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="rekappresence">
-        <div id="chartdiv"></div>
-        <!-- <div class="row">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence primary">
-                                <ion-icon name="log-in"></ion-icon>
-                            </div>
-                            <div class="presencedetail">
-                                <h4 class="rekappresencetitle">Hadir</h4>
-                                <span class="rekappresencedetail">0 Hari</span>
+    <!-- Today Presence Section -->
+    <div class="section mt-4" id="presence-section">
+        <h2 class="section-title mb-3 fs-6 fw-bold">Absensi Hari Ini</h2>
+        <div class="todaypresence">
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="card bg-gradient-success border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-white bg-opacity-25 p-2 me-3">
+                                    <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+                                </div>
+                                <div class="presence-detail text-white">
+                                    <h4 class="fs-6 mb-0 fw-bold">Masuk</h4>
+                                    <span class="fs-5 fw-light">{{ $settings->jam_masuk ?? '08:00' }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence green">
-                                <ion-icon name="document-text"></ion-icon>
-                            </div>
-                            <div class="presencedetail">
-                                <h4 class="rekappresencetitle">Izin</h4>
-                                <span class="rekappresencedetail">0 Hari</span>
+                <div class="col-6">
+                    <div class="card bg-gradient-danger border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-white bg-opacity-25 p-2 me-3">
+                                    <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+                                </div>
+                                <div class="presence-detail text-white">
+                                    <h4 class="fs-6 mb-0 fw-bold">Pulang</h4>
+                                    <span class="fs-5 fw-light">{{ $settings->jam_pulang ?? '17:00' }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence warning">
-                                <ion-icon name="sad"></ion-icon>
+
+        <!-- Attendance Summary Section -->
+        <h2 class="section-title mt-4 mb-3 fs-6 fw-bold text-secondary">Rekap Absensi</h2>
+        <div class="rekappresence">
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-light-primary p-2 me-3">
+                                    <ion-icon name="log-in-outline" class="text-primary" style="font-size: 1.2rem;"></ion-icon>
+                                </div>
+                                <div class="presence-detail">
+                                    <h4 class="fs-7 mb-0 text-muted">Hadir</h4>
+                                    <span class="fs-6 fw-bold">{{ $summary->hadir ?? 0 }} Hari</span>
+                                </div>
                             </div>
-                            <div class="presencedetail">
-                                <h4 class="rekappresencetitle">Sakit</h4>
-                                <span class="rekappresencedetail">0 Hari</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-light-success p-2 me-3">
+                                    <ion-icon name="document-text-outline" class="text-success" style="font-size: 1.2rem;"></ion-icon>
+                                </div>
+                                <div class="presence-detail">
+                                    <h4 class="fs-7 mb-0 text-muted">Izin</h4>
+                                    <span class="fs-6 fw-bold">{{ $summary->izin ?? 0 }} Hari</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mt-1">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-light-warning p-2 me-3">
+                                    <ion-icon name="sad-outline" class="text-warning" style="font-size: 1.2rem;"></ion-icon>
+                                </div>
+                                <div class="presence-detail">
+                                    <h4 class="fs-7 mb-0 text-muted">Sakit</h4>
+                                    <span class="fs-6 fw-bold">{{ $summary->sakit ?? 0 }} Hari</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 mt-1">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="presence-icon rounded-circle bg-light-danger p-2 me-3">
+                                    <ion-icon name="alarm-outline" class="text-danger" style="font-size: 1.2rem;"></ion-icon>
+                                </div>
+                                <div class="presence-detail">
+                                    <h4 class="fs-7 mb-0 text-muted">Terlambat</h4>
+                                    <span class="fs-6 fw-bold">{{ $summary->terlambat ?? 0 }} Hari</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="presencecontent">
-                            <div class="iconpresence danger">
-                                <ion-icon name="alarm"></ion-icon>
-                            </div>
-                            <div class="presencedetail">
-                                <h4 class="rekappresencetitle">Terlambat</h4>
-                                <span class="rekappresencedetail">0 Hari</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
-    <div class="presencetab mt-2">
-        <div class="tab-pane fade show active" id="pilled" role="tabpanel">
-            <ul class="nav nav-tabs style1" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+        </div>
+
+        <!-- Tabs Section -->
+        <div class="presencetab mt-4">
+            <ul class="nav nav-tabs nav-fill bg-light rounded-pill mb-3" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill w-100" id="bulanIni-tab" data-bs-toggle="tab" data-bs-target="#bulanIni" type="button" role="tab" aria-controls="bulanIni" aria-selected="true">
                         Bulan Ini
-                    </a>
+                    </button>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill w-100" id="leaderboard-tab" data-bs-toggle="tab" data-bs-target="#leaderboard" type="button" role="tab" aria-controls="leaderboard" aria-selected="false">
                         Leaderboard
-                    </a>
+                    </button>
                 </li>
             </ul>
-        </div>
-        <div class="tab-content mt-2" style="margin-bottom:100px;">
-            <div class="tab-pane fade show active" id="home" role="tabpanel">
-                <ul class="listview image-listview">
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-primary">
-                                <ion-icon name="image-outline" role="img" class="md hydrated"
-                                    aria-label="image outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Photos</div>
-                                <span class="badge badge-danger">10</span>
-                            </div>
+            
+            <div class="tab-content mt-3" style="margin-bottom:100px;">
+                <!-- Tab Bulan Ini -->
+                <div class="tab-pane fade show active" id="bulanIni" role="tabpanel" aria-labelledby="bulanIni-tab">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                @forelse ($absensis as $absen)
+                                    <li class="list-group-item border-0 py-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="presence-icon rounded-circle bg-light-primary p-2 me-3">
+                                                <ion-icon name="calendar-outline" class="text-primary"></ion-icon>
+                                            </div>
+                                            <div class="presence-detail">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <h4 class="fs-6 mb-0 fw-medium">{{ \Carbon\Carbon::parse($absen->tgl_absen)->format('d M Y') }}</h4>
+                                                    <span class="badge bg-{{ $absen->status == 'hadir' ? 'success' : ($absen->status == 'izin' ? 'primary' : ($absen->status == 'sakit' ? 'warning' : 'danger')) }} ms-2 rounded-pill">
+                                                        {{ ucfirst($absen->status) }}
+                                                    </span>
+                                                </div>
+                                                <p class="text-muted mb-0 small">
+                                                    <ion-icon name="time-outline" class="align-middle me-1"></ion-icon>
+                                                    {{ \Carbon\Carbon::parse($absen->jam_absen)->format('H:i') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <li class="list-group-item border-0 py-4 text-center">
+                                        <div class="text-muted">
+                                            <ion-icon name="calendar-outline" style="font-size: 3rem;" class="text-light mb-2"></ion-icon>
+                                            <p>Belum ada data absensi bulan ini</p>
+                                        </div>
+                                    </li>
+                                @endforelse
+                            </ul>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-secondary">
-                                <ion-icon name="videocam-outline" role="img" class="md hydrated"
-                                    aria-label="videocam outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Videos</div>
-                                <span class="text-muted">None</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <div class="icon-box bg-danger">
-                                <ion-icon name="musical-notes-outline" role="img" class="md hydrated"
-                                    aria-label="musical notes outline"></ion-icon>
-                            </div>
-                            <div class="in">
-                                <div>Music</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel">
-                <ul class="listview image-listview">
-                    <li>
-                        <div class="item">
-                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                            <div class="in">
-                                <div>Edward Lindgren</div>
-                                <span class="text-muted">Designer</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                            <div class="in">
-                                <div>Emelda Scandroot</div>
-                                <span class="badge badge-primary">3</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                            <div class="in">
-                                <div>Henry Bove</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                            <div class="in">
-                                <div>Henry Bove</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item">
-                            <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                            <div class="in">
-                                <div>Henry Bove</div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                    </div>
+                </div>
 
+                <!-- Tab Leaderboard -->
+                <div class="tab-pane fade" id="leaderboard" role="tabpanel" aria-labelledby="leaderboard-tab">
+                    <div class="card border-0 shadow-sm rounded-4">
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                @forelse ($leaderboard as $index => $user)
+                                    <li class="list-group-item border-0 py-3">
+                                        <div class="d-flex align-items-center position-relative">
+                                            <div class=" me-3">
+                                                <div class="presence-icon rounded-circle bg-light-warning p-2">
+                                                    <ion-icon name="trophy-outline" class="text-warning"></ion-icon>
+                                                </div>
+                                                <div class="position-absolute top-0 right-0 translate-middle badge rounded-pill bg-primary">
+                                                    {{ $index + 1 }}
+                                                </div>
+                                            </div>
+                                            <div class="presence-detail">
+                                                <h4 class="fs-6 mb-1 fw-medium">{{ $user->name }}</h4>
+                                                <div>
+                                                    <span class="badge bg-success rounded-pill">
+                                                        <ion-icon name="checkmark-circle-outline" class="align-middle me-1"></ion-icon>
+                                                        {{ $user->total_hadir }} Hadir
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <li class="list-group-item border-0 py-4 text-center">
+                                        <div class="text-muted">
+                                            <ion-icon name="trophy-outline" style="font-size: 3rem;" class="text-light mb-2"></ion-icon>
+                                            <p>Belum ada data leaderboard</p>
+                                        </div>
+                                    </li>
+                                @endforelse
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-
-<script>
-    function toggleDropdown() {
-        var dropdown = document.getElementById('user-dropdown');
-        if (dropdown.style.display === 'none') {
-            dropdown.style.display = 'block';
-        } else {
-            dropdown.style.display = 'none';
+    <!-- Custom CSS -->
+    <style>
+        .bg-gradient-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
         }
-    }
-
-    // Menutup dropdown jika user klik di luar area dropdown
-    window.addEventListener('click', function(e) {
-        var userDetail = document.getElementById('user-detail');
-        if (!userDetail.contains(e.target)) {
-            document.getElementById('user-dropdown').style.display = 'none';
+        
+        .bg-gradient-danger {
+            background: linear-gradient(135deg, #dc3545, #fd7e14);
         }
-    });
-</script>
+        
+        .bg-light-primary {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+        
+        .bg-light-success {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+        
+        .bg-light-warning {
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+        
+        .bg-light-danger {
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-icon ion-icon {
+            font-size: 1.5rem;
+        }
+        
+        .presence-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 40px;
+        }
+        
+        .fs-7 {
+            font-size: 0.85rem;
+        }
+        
+        .rounded-4 {
+            border-radius: 0.75rem;
+        }
+        
+        .dropdown-menu.fade {
+            transition: all 0.2s ease;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        
+        .dropdown-menu.fade.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Hover effect for nav tabs */
+        .nav-tabs .nav-link {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(13, 110, 253, 0.1);
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Bootstrap tabs
+            var tabElms = document.querySelectorAll('button[data-bs-toggle="tab"]');
+            tabElms.forEach(function(tabElm) {
+                tabElm.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    
+                    // Remove active class from all tabs and panes
+                    document.querySelectorAll('.nav-link').forEach(function(el) {
+                        el.classList.remove('active');
+                        el.setAttribute('aria-selected', 'false');
+                    });
+                    
+                    document.querySelectorAll('.tab-pane').forEach(function(el) {
+                        el.classList.remove('show', 'active');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+                    
+                    // Get target pane and activate it
+                    var target = document.querySelector(this.getAttribute('data-bs-target'));
+                    if (target) {
+                        target.classList.add('show', 'active');
+                    }
+                });
+            });
+        });
+        
+        function toggleDropdown() {
+            var dropdown = document.getElementById('user-dropdown');
+            if (dropdown.style.display === 'none') {
+                dropdown.style.display = 'block';
+                dropdown.classList.add('show');
+            } else {
+                dropdown.style.display = 'none';
+                dropdown.classList.remove('show');
+            }
+        }
+
+        // Close dropdown if user clicks outside
+        window.addEventListener('click', function(e) {
+            var userDetail = document.getElementById('user-detail');
+            if (userDetail && !userDetail.contains(e.target)) {
+                var dropdown = document.getElementById('user-dropdown');
+                if (dropdown) {
+                    dropdown.style.display = 'none';
+                    dropdown.classList.remove('show');
+                }
+            }
+        });
+    </script>
 @endsection()
